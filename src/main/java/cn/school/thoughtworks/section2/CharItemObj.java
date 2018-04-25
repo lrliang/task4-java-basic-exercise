@@ -1,15 +1,19 @@
 package cn.school.thoughtworks.section2;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CharItemObj {
 
   private String ch;
   private Integer count;
 
   static CharItemObj createChByStr(String charItemStr) {
-    Integer count =
-        charItemStr.length() > 1
-            ? Integer.valueOf(charItemStr.substring(charItemStr.length() - 1))
-            : 1;
+    Integer count = 1;
+    Pattern pattern = Pattern.compile("\\d+");
+    Matcher matcher = pattern.matcher(charItemStr);
+    while (matcher.find()) { count =  Integer.valueOf(matcher.group(0)); }
+
     String ch = charItemStr.substring(0, 1);
     return new CharItemObj(ch, count);
   }
